@@ -1,6 +1,7 @@
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,19 +10,18 @@ public class Main {
 
         nobelList.add(new Person("George", "Louis Augustus", 67));
         nobelList.add(new Person("William", "Frederick Henry Alexand", 55));
-        nobelList.add(new Person("Albert", "Williams", 56));
+        nobelList.add(new Person("Albert", "Williams", 15));
         nobelList.add(new Person("Christian", "George Andrew Patrick David", 77));
-        nobelList.add(new Person("Elizabeth", "Alexandra Mary", 96));
+        nobelList.add(new Person("Elizabeth", "Alexandra Mary", 16));
 
         printList(nobelList); // Не сортарованный список
 
-        Collections.sort(nobelList, new NobelComparator(2));
+        nobelList.removeIf(person -> person.getAge() < 18);
+
+        Collections.sort(nobelList, new NobelComparator(1));
 
         printList(nobelList); // Список по возростанию знатности
 
-        Collections.sort(nobelList, new NobelComparator(4));
-
-        printList(nobelList); // Список по возростанию знатности, если в фамилии более 4х слов. если меньше то по возрасту.
     }
 
     public static void printList(List<Person> nobelList) {
