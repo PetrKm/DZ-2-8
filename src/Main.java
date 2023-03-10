@@ -1,4 +1,5 @@
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,13 +16,12 @@ public class Main {
 
         printList(nobelList); // Не сортарованный список
 
-        Collections.sort(nobelList, new NobelComparator(2));
+        Comparator<Person> comparator = Comparator.comparingInt(o -> o.getSurname().split("(?U)\\W").length); // Использование этого метода подсказала сама идея
+
+        Collections.sort(nobelList, comparator);
 
         printList(nobelList); // Список по возростанию знатности
 
-        Collections.sort(nobelList, new NobelComparator(4));
-
-        printList(nobelList); // Список по возростанию знатности, если в фамилии более 4х слов. если меньше то по возрасту.
     }
 
     public static void printList(List<Person> nobelList) {
